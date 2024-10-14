@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+jinja2
+aiofiles
+pymysql
+python-dotenv
+pandas
+openpyxl

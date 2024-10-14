@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Covid-19 누적데이터 - Home
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Covid-19 누적데이터</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Home</li>
+        </ol>
+
+        <!-- Row for cards with summary data -->
+        <div class="row">
+            <div class="col-xl-6 col-md-6">
+                <div class="card bg-light text-dark mb-4" style="padding: 10px; min-height: 100px;">
+                    <div class="card-body">
+                        <h5 class="mb-2">누적 확진자 수</h5>
+                        <span class="h3 text-end d-block">{{ total_cases }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card bg-light text-dark mb-4" style="padding: 10px; min-height: 100px;">
+                    <div class="card-body">
+                        <h5 class="mb-2">누적 사망자 수</h5>
+                        <span class="h3 text-end d-block">{{ total_deaths }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Row for charts -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area me-1"></i>
+                        월별 확진자 및 사망자 차트
+                    </div>
+                    <div class="card-body">
+                        <canvas id="combinedChart" width="100%" height="40"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 차트 데이터를 전달 -->
+        <div id="chart-data"
+            data-months='{{ months | tojson }}'
+            data-monthly-cases='{{ monthly_cases | tojson }}'
+            data-monthly-deaths='{{ monthly_deaths | tojson }}'>
+        </div>
+    </div>
+    <!-- Chart.js 라이브러리 (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="/static/js/covid_combined.js"></script> <!-- 확진자 및 사망자 차트 스크립트 -->
+{% endblock %}

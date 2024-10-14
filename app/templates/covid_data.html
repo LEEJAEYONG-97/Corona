@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Covid-19 데이터 분석
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Covid-19 데이터 분석</h1>
+
+    <!-- 연령별 확진자 추이 -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-line me-1"></i>
+                    연령별 확진자 추이
+                </div>
+                <div class="card-body">
+                    <canvas id="ageLineChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 파이 차트 및 연령별 사망자 차트 -->
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    연도별 사망자 추이
+                </div>
+                <div class="card-body">
+                    <canvas id="ageDeathsChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-pie me-1"></i>
+                    확진자 성비
+                </div>
+                <div class="card-body">
+                    <canvas id="genderPieChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 권역별 확진자 및 사망자 차트 -->
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    수도권 확진자/사망자 추이
+                </div>
+                <div class="card-body">
+                    <canvas id="seoulRegionChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    충청권 확진자/사망자 추이
+                </div>
+                <div class="card-body">
+                    <canvas id="chungcheongRegionChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    영남권 확진자/사망자 추이
+                </div>
+                <div class="card-body">
+                    <canvas id="yeongnamRegionChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    호남권 확진자/사망자 추이
+                </div>
+                <div class="card-body">
+                    <canvas id="honamRegionChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 차트 데이터를 전달 -->
+    <div id="chart-data"
+        data-male='{{ male }}'
+        data-female='{{ female }}'
+        data-months='{{ months | tojson }}'
+        data-age-groups='{{ age_groups | tojson }}'
+        data-years='{{ years | tojson }}'
+        data-age-deaths='{{ age_deaths | tojson }}'
+        data-region-city-confirmed='{{ region_city_confirmed | tojson }}'
+        data-region-city-deaths='{{ region_city_deaths | tojson }}'>
+    </div>
+</div>
+
+<!-- Chart.js 및 플러그인 라이브러리 (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+<!-- 차트 스크립트 -->
+<script src="/static/js/covid_gender.js"></script> <!-- 성별 차트 스크립트 -->
+<script src="/static/js/covid_age.js"></script> <!-- 연령별 차트 스크립트 -->
+<script src="/static/js/covid_age_deaths.js"></script> <!-- 연도별 사망자 차트 스크립트 -->
+
+<!-- 권역별 차트 스크립트 -->
+<script src="/static/js/covid_region_charts.js"></script> <!-- 권역별 차트 스크립트 -->
+{% endblock %}

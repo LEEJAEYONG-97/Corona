@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Movie Data 분석
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Movie Data 분석</h1>
+
+    <!-- 분석 데이터 카드 -->
+    <div class="row">
+        <div class="col-xl-3 col-md-3">
+            <div class="card bg-light text-dark mb-4" style="padding: 10px; min-height: 100px;">
+                <div class="card-body">
+                    <h5 class="mb-2">개봉 영화</h5>
+                    <span class="h3 text-end d-block">{{ "{:,}".format(data_count) }} 편</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-3">
+            <div class="card bg-light text-dark mb-4" style="padding: 10px; min-height: 100px;">
+                <div class="card-body">
+                    <h5 class="mb-2">평균 스크린 수</h5>
+                    <span class="h3 text-end d-block">{{ "{:,}".format(avg_screen_cnt | round(2)) }} 개</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-3">
+            <div class="card bg-light text-dark mb-4" style="padding: 10px; min-height: 100px;">
+                <div class="card-body">
+                    <h5 class="mb-2">평균 매출액</h5>
+                    <span class="h3 text-end d-block">{{ "{:,}".format(avg_total_sales | round(2)) }} 원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-3">
+            <div class="card bg-light text-dark mb-4" style="padding: 10px; min-height: 100px;">
+                <div class="card-body">
+                    <h5 class="mb-2">평균 관객 수</h5>
+                    <span class="h3 text-end d-block">{{ "{:,}".format(avg_audience | round(2)) }} 명</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- 연도별 개봉 영화 편수 및 상영관 수 차트 -->
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    연도별 개봉 영화 편수 및 상영관 수
+                </div>
+                <div class="card-body">
+                    <canvas id="yearlyDataChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- 연도별 관객수 차트 -->
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-line me-1"></i>
+                    연도별 누적 관객수 
+                </div>
+                <div class="card-body">
+                    <canvas id="audienceChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 영화 산업 이미지 삽입 -->
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    연간 1인당 관람 횟수
+                </div>
+                <div class="card-body text-center">
+                    <img src="/static/images/audience.jpg" alt="yearlyAudience" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    국내 3사 매출 흐름
+                </div>
+                <div class="card-body text-center">
+                    <img src="/static/images/total_sales.jpg" alt="sales Flow" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 차트 데이터를 전달 -->
+    <div id="chart-data"
+        data-yearly-data-count='{{ yearly_data_count | tojson }}'
+        data-yearly-screen-count='{{ yearly_screen_count | tojson }}'
+        data-years='{{ years | tojson }}'
+        data-audience-counts='{{ audience_counts | tojson }}'>
+    </div>
+</div>
+
+<!-- Chart.js 라이브러리 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+<!-- 영화 차트 스크립트 파일 -->
+<script src="/static/js/movie_chart.js"></script>
+
+<!-- 연도별 관객수 차트 스크립트 파일 -->
+<script src="/static/js/yearly_audience_chart.js"></script>
+
+{% endblock %}
