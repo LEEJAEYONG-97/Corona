@@ -156,7 +156,7 @@ Performance comparison of the LSTM multivariate time series model
 
 ||mse|R^2SCORE|
 |:---:|:---:|:---:|
-|LSTM|1.3911326|0.999952|
+|<span style="color:red">LSTM</span>|1.3911326|0.999952|
 
 Performance comparison of the ARIMA time series model
 
