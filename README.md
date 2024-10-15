@@ -73,6 +73,32 @@ Chart of monthly attendance figures by sports association
 
 Number of films released and number of screening theaters by year
 ![image17](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda10.png)
+# Model Design
+
+1. **Data Preparation**
+   - Confirm data characteristics
+   - Handle missing values
+   - Extract variables
+
+2. **Input and Prediction Variable Setup**
+   - Set up input and prediction variables
+   - Create sequence data
+
+3. **Data Normalization**
+   - Apply MinMaxScaler for normalization
+   - Encode categorical variables
+
+4. **Data Splitting**
+   - Split the data into training (80%) and testing (20%) sets
+
+5. **Model Comparison**
+   - Compare MSE and R² Score among four models (LSTM, VAR, SARIMA, ARIMA)
+
+6. **Prediction Results Validation**
+   - Validate the prediction results
+
+7. **Web Implementation of Prediction Model**
+   - Implement the prediction model as a web service
 
 # Models
 
