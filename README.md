@@ -43,18 +43,36 @@ Data common collection period: January 2020 to September 2023
 - **Organization**: Sports association for the respective sport  
 - **Attendance**: Number of spectators at the event 
 
-
-![image3](https://github.com/LEEJAEYONG-97/portfolio/blob/341803756a1e4620a4ff964c1f0b7a25d9f3b212/app/static/assets/img/heatmap.png)
-
-
 # EDA
-**Exploratory Data Analysis (EDA)**: Comparison of annual average, monthly average, and seasonal fine dust levels between China and Korea, along with visualization of monthly average humidity and wind speed in Korea. using Pandas, Seaborn, and Matplotlib.
+**Exploratory Data Analysis (EDA)**
+Chart of monthly confirmed cases and deaths
 
-![image4](https://github.com/LEEJAEYONG-97/portfolio/blob/341803756a1e4620a4ff964c1f0b7a25d9f3b212/app/static/assets/img/eda.png)
-![image5](https://github.com/LEEJAEYONG-97/portfolio/blob/341803756a1e4620a4ff964c1f0b7a25d9f3b212/app/static/assets/img/eda2.png)
+![image16](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda.png)
 
+![image3](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda1.png)
 
-It can be observed that fine dust levels are high in winter, with strong wind speeds and low humidity.
+Chart of confirmed cases and deaths by region
+
+![image4](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda2.png)
+
+Chart of monthly confirmed cases and attendance figures
+
+![image5](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda3.png)
+
+Chart of the number of games played without spectators by association
+
+![image8](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda4.png)
+
+Chart of monthly attendance figures by sports association
+
+![image9](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda5.png)
+![image12](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda6.png)
+![image13](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda7.png)
+![image14](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda8.png)
+![image15](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda9.png)
+
+Number of films released and number of screening theaters by year
+![image17](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda10.png)
 
 # Models
 
@@ -69,49 +87,86 @@ ARIMA is a popular statistical model used for forecasting time series data. It c
 
 ARIMA is well-suited for univariate time series forecasting, particularly when the data shows trends or seasonality.
 
-### Kalman Filter
-The Kalman filter is an algorithm that uses a series of measurements observed over time, containing statistical noise and other inaccuracies, to estimate unknown variables. It operates in a two-step process: 
-1. **Prediction**: Estimates the current state based on the previous state.
-2. **Update**: Adjusts the estimates based on the new measurement.
+### SARIMA (Seasonal AutoRegressive Integrated Moving Average)
 
-Kalman filters are widely used in control systems, navigation, and time series analysis, providing a way to infer the hidden state of a system over time.
+**SARIMA** is an advanced time series forecasting model that incorporates seasonal effects alongside the features of the ARIMA model. It is particularly useful for datasets exhibiting seasonality, trends, and non-stationarity.
 
-![image6](https://github.com/LEEJAEYONG-97/portfolio/blob/8168128b106a7c676d7b7f06dd6ac93d990732a8/app/static/assets/img/predict.png)
+**Components:**
+- **Seasonal (S)**: Captures seasonal patterns in the data, allowing the model to adjust for fluctuations that occur at regular intervals.
+- **AutoRegressive (AR)**: Models the relationship between an observation and a specified number of lagged observations (previous time points).
+- **Integrated (I)**: Involves differencing the data to achieve stationarity, which means the mean and variance of the series remain constant over time.
+- **Moving Average (MA)**: Accounts for the relationship between an observation and a residual error from a moving average model applied to lagged observations.
+
+**Model Specification:**
+A SARIMA model is typically expressed as SARIMA(p, d, q)(P, D, Q, s), where:
+- **p**: Order of the autoregressive component.
+- **d**: Degree of differencing.
+- **q**: Order of the moving average component.
+- **P**: Order of the seasonal autoregressive component.
+- **D**: Degree of seasonal differencing.
+- **Q**: Order of the seasonal moving average component.
+- **s**: Length of the seasonal cycle (e.g., 12 for monthly data).
+
+**Applications:**
+SARIMA is widely used for forecasting in various fields, including finance, economics, and environmental science, where data shows both trends and seasonal variations.
+
+### VAR (Vector AutoRegression)
+
+**VAR** is a statistical model used to capture the linear interdependencies among multiple time series. It is particularly useful when you want to model and forecast systems with multiple variables that influence each other.
+
+**Components:**
+- **Multivariate**: VAR models multiple time series simultaneously, allowing for interactions among the variables.
+- **Lagged Relationships**: Each variable in the model is regressed on its own lagged values and the lagged values of all other variables in the system.
+
+**Model Specification:**
+A VAR model is typically expressed as VAR(p), where:
+- **p**: Number of lags used in the model.
+
+**Applications:**
+VAR is widely used in econometrics and finance for forecasting, policy analysis, and understanding the dynamic relationships between variables such as GDP, interest rates, and inflation.
 
 # Model Evaluation
 Performance comparison of the LSTM multivariate time series model
 
 ||mse|R^2SCORE|
 |:---:|:---:|:---:|
-|LSTM|0.009|0.437|
+|LSTM|1.3911326|0.999952|
 
 Performance comparison of the ARIMA time series model
 
 ||mse|R^2SCORE|
 |:---:|:---:|:---:|
-|pm25|109.006|-133.524|
-|pm10|12.975|-4.308|
+|attendance|90915449.756|-8059363882.537|
+|screen_cnt|31337.131|-2780133.524|
+|total_sales|1.2273164|-4.3081347|
+|audience|107229772671.164|-5459062054041.54|
 
-Performance comparison of the Kalman Filter model
+Performance comparison of the SARIMA time series model
 
 ||mse|R^2SCORE|
 |:---:|:---:|:---:|
-|pm25|63.4558|0.9128|
-|pm10|31.0998|0.9033|
+|attendance|90858232.219|-8054291730.872|
+|screen_cnt|31676.808|-2810268.624|
+|total_sales|1.25505872|-4.405515|
+|audience|110191715359.747|-5609854399625.223|
 
+Performance comparison of the VAR multivariate time series model
 
-Comparison of MSE and R² Score among the three models:
+||mse|R^2SCORE|
+|:---:|:---:|:---:|
+|VAR|5.239956|-0.332326|
 
-- MSE: LSTM > Kalman Filter > ARIMA  
-- R² Score: Kalman Filter > LSTM > ARIMA  
+Comparison of MSE and R² Score among the four models:
 
-Although LSTM has a higher MSE, it is best suited for multivariate factors and complex models, demonstrating the best overall performance.
+- **MSE**: LSTM > VAR > SARIMA > ARIMA  
+- **R² Score**: LSTM > VAR > SARIMA > ARIMA  
 
+The LSTM model demonstrates the best performance, as it has the highest MSE and R² Score.
 
 # Web structure
 
-![image7](https://github.com/LEEJAEYONG-97/portfolio/blob/d1cd4231fc5d8e9fc7edc10bd7ab1b8659a3d6e2/app/static/assets/img/web.png)
+![image7](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EA%B5%AC%EC%A1%B0%EB%8F%84.png)
 
 # WebService
-![image10](https://github.com/LEEJAEYONG-97/portfolio/blob/d1cd4231fc5d8e9fc7edc10bd7ab1b8659a3d6e2/app/static/assets/img/web2.png)
-![image11](https://github.com/LEEJAEYONG-97/portfolio/blob/d1cd4231fc5d8e9fc7edc10bd7ab1b8659a3d6e2/app/static/assets/img/web3.png)
+![image10](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/web2.png)
+
